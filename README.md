@@ -8,19 +8,24 @@ devise-kerberos-authenticatable is a Devise exenstion that can be used to authen
 
 ###Dependencies
 [timfel-krb5-auth](https://github.com/timfel/krb5-auth) depends on the headers and development libraries for MIT Kerberos.
+
 ```sudo apt-get install libkrb5-dev```
 ###Server Setup
 Modify your /etc/krb5.conf file as necessary to authenticate against your Kerberos server.
 
 ###Rails Setup
 * Edit config/initializers/devise.rb to use a username instead of email for login.
+
 ```config.authentication_keys = [ :username ]```
 * Update your Devise model app/models/user.rb
+
 ```
 devise :kerberos_authenticatable
 attr_accessible :username
 ```
+
 * Rebuild your Devise views automatically or by hand.
+
 ```
 rake generate devise:views
 ```
