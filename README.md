@@ -27,6 +27,7 @@ devise :kerberos_authenticatable
 attr_accessible :username
 ```
 
+* Update your User table in your database to include the username field.
 * Rebuild your Devise views automatically or by hand.
 
 ```
