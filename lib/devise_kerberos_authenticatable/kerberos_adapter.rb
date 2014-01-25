@@ -12,10 +12,10 @@ module Devise
       begin
         krb5.get_init_creds_password(username, password)
       rescue Krb5Auth::Krb5::Exception
-        false
+        return false
       end
 
-      true
+      return true
     end
   end
 end

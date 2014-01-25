@@ -14,5 +14,5 @@ Gem::Specification.new do |s|
   s.homepage        = 'http://www.github.com/atomaka/devise-kerberos-authenticatable'
 
   s.add_dependency  'timfel-krb5-auth', '~> 0.8'
-  s.add_dependency  'devise', '~> 2.2.3'
+  s.add_dependency  'devise', '~> 3.1.1'
 end
