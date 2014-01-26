@@ -17,7 +17,7 @@ module Devise
 
       protected
         def valid_controller?
-          params[:controller] == 'devise/sessions'
+          params[:controller].include?('sessions')
         end
 
         def valid_params?
