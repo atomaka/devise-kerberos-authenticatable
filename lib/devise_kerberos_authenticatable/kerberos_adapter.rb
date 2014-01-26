@@ -5,7 +5,7 @@ module Devise
   module KerberosAdapter
     def self.valid_credentials?(username, password)
       if Rails.env.test? && username == 'test' && password == 'test' then
-        true
+        return true
       end
 
       krb5 = Krb5.new
