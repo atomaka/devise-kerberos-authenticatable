@@ -28,7 +28,6 @@ module Devise
           if resource.blank?
             resource = new
             resource[:username] = attributes['username']
-            resource[:password] = attributes['password']
           end
 
           if resource.try(:valid_kerberos_authentication?, attributes[:password])
