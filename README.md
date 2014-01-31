@@ -17,9 +17,44 @@ Modify your /etc/krb5.conf file as necessary to authenticate against your Kerber
 * Update your gemfile
 
 ```gem 'devise-kerberos-authenticatable', :git => 'git://github.com/atomaka/devise-kerberos-authenticatable.git'```
-* Edit config/initializers/devise.rb to use a username instead of email for login.
 
-```config.authentication_keys = [ :username ]```
+* Create a migration to add username field to user table
+
+```
+class AddUsernameToUser < ActiveRecord::Migration
+  def change
+    add_column :users, :username, :string
+  end
+end
+```
+
+* Create a migration to remove the index on email from the user table 
+
+```
+class RemoveIndexOnEmailFromUsers < ActiveRecord::Migration
+  def up
+    remove_index :users, 'email'
+  end
+
+  def down
+    add_index :users, :email, :unique => true
+  end
+end
+```
+* Migrate the databse
+
+```
+rake db:migrate
+```
+
+* Edit config/initializers/devise.rb to use a username instead of email for login and add a kerberos realm to use.
+
+```
+config.authentication_keys = [ :username ]
+config.kerberos_realm = "EXAMPLE.REALM"    
+```
+
+
 * Update your Devise model app/models/user.rb
 
 ```
@@ -27,7 +62,6 @@ devise :kerberos_authenticatable
 attr_accessible :username
 ```
 
-* Update your User table in your database to include the username field and remove the index from the email field.
 * Rebuild your Devise views automatically or by hand.
 
 ```
