@@ -23,7 +23,7 @@ module Devise
         def authenticate_with_kerberos(attributes = {})
           return nil unless attributes[:username].present?
 
-          resource = scoped.where(:username => attributes['username']).first
+          resource = all.where(:username => attributes['username']).first
 
           if resource.blank?
             resource = new
